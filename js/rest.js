@@ -11,30 +11,6 @@ function getRequestObject() {
     return(null);
 }
 
-function sendGetRequest(url, successCallback) {
-  let request = getRequestObject();
-
-  request.onreadystatechange = function() {
-    if (request.readyState == 4) {
-      if(request.status == 200) {
-        successCallback(JSON.parse(request.response));
-      }
-
-      else if (request.status = 401) {
-        onSessionLost();
-      }
-
-      else {
-        alert(`Error ${request.status}: ${request.response}`);
-      }
-    }
-  }
-  request.open("GET", url, true);
-  request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  request.setRequestHeader('Authorization', 'JWT ' + getAccessToken())
-  request.send(null);
-}
-
 function signupme() {
   let form = document.getElementsByTagName("form")[0];
   let user = {
@@ -62,6 +38,30 @@ function signupme() {
 function saveMemoScore() {
 
 }
+
+// function sendGetRequest(url, successCallback) {
+//   let request = getRequestObject();
+
+//   request.onreadystatechange = function() {
+//     if (request.readyState == 4) {
+//       if(request.status == 200) {
+//         successCallback(JSON.parse(request.response));
+//       }
+
+//       else if (request.status = 401) {
+//         onSessionLost();
+//       }
+
+//       else {
+//         alert(`Error ${request.status}: ${request.response}`);
+//       }
+//     }
+//   }
+//   request.open("GET", url, true);
+//   request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+//   request.setRequestHeader('Authorization', 'JWT ' + getAccessToken())
+//   request.send(null);
+// }
 
 // function addOnline(record) {
 //   let records = {
