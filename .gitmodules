@@ -1,0 +1,3 @@
+[submodule "games/MEMO"]
+	path = games/MEMO
+	url = https://github.com/IO-Proj/MEMO-Game.git
