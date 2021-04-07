@@ -33,6 +33,18 @@ function signupme() {
   request.open("POST", `${appAddress}/api/add/user`, true);
   request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   request.send(JSON.stringify(user));
+
+
+  /* TEST - DO USUNIĘCIA */
+  let test = document.getElementById("request-test");
+  let request2 = getRequestObject();
+  request2.onreadystatechange = function() {
+    test.innerHTML = request2.response;
+  }
+  request2.open("GET", `${appAddress}/test`, true);
+  request2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  request2.send(JSON.stringify(user));
+  /***********************/
 }
 
 function saveMemoScore(seconds, comparisons) {
