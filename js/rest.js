@@ -12,27 +12,27 @@ function getRequestObject() {
 }
 
 function signupme() {
-  let form = document.getElementsByTagName("form")[0];
-  let user = {
-    'username': form.username.value,
-    'password': form.pass.value
-  };
+  // let form = document.getElementsByTagName("form")[0];
+  // let user = {
+  //   'username': form.username.value,
+  //   'password': form.pass.value
+  // };
 
-  let request = getRequestObject();
-  request.onreadystatechange = function() {
-    if (request.readyState == 4) {
-      if(request.status == 200) {
-        loginme(user);
-      }
+  // let request = getRequestObject();
+  // request.onreadystatechange = function() {
+  //   if (request.readyState == 4) {
+  //     if(request.status == 200) {
+  //       loginme(user);
+  //     }
 
-      else {
-        alert(`Error ${request.status}: ${request.response}`);
-      }
-    }
-  }
-  request.open("POST", `${appAddress}/api/add/user`, true);
-  request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  request.send(JSON.stringify(user));
+  //     else {
+  //       alert(`Error ${request.status}: ${request.response}`);
+  //     }
+  //   }
+  // }
+  // request.open("POST", `${appAddress}/api/add/user`, true);
+  // request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  // request.send(JSON.stringify(user));
 
 
   /* TEST - DO USUNIĘCIA */
