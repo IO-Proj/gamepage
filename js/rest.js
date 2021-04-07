@@ -35,8 +35,59 @@ function signupme() {
   request.send(JSON.stringify(user));
 }
 
-function saveMemoScore() {
+function saveMemoScore(seconds, comparisons) {
+  let score = {
+    'seconds': seconds,
+    'comparisons': comparisons
+  };
 
+  let request = getRequestObject();
+
+  request.onreadystatechange = function () {
+    if (request.readyState == 4 ) {
+
+      if(request.status == 200) {
+        console.log('OK');
+      }
+
+      else if(request.status == 401) {
+        onSessionLost();
+      }
+
+      else {
+        alert(`Error ${request.status}: ${request.response}`)
+      }
+    }
+  }
+
+  request.open("POST", `${appAddress}/api/add/score/memo`, true);
+  request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  request.setRequestHeader('Authorization', 'JWT ' + getAccessToken())
+  request.send(JSON.stringify(score));
+}
+
+function getUserInfo() {
+  let request = getRequestObject();
+
+  request.onreadystatechange = function() {
+    if (request.readyState == 4) {
+      if(request.status == 200) {
+        console.log(request.response);
+      }
+
+      else if (request.status = 401) {
+        onSessionLost();
+      }
+
+      else {
+        alert(`Error ${request.status}: ${request.response}`);
+      }
+    }
+  }
+  request.open("GET", `${appAddress}/api/user/info`, true);
+  request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  request.setRequestHeader('Authorization', 'JWT ' + getAccessToken())
+  request.send(null);
 }
 
 // function sendGetRequest(url, successCallback) {
