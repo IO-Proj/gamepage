@@ -40,7 +40,7 @@ function signupme() {
   request2.onreadystatechange = function() {
     if (request2.readyState == 4) {
       if(request2.status == 200) {
-        alert(request2)
+        alert(request2.response)
       }
 
     }
