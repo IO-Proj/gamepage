@@ -36,10 +36,14 @@ function signupme() {
 
 
   /* TEST - DO USUNIĘCIA */
-  let test = document.getElementById("request-test");
   let request2 = getRequestObject();
   request2.onreadystatechange = function() {
-    test.innerHTML = request2.response;
+    if (request2.readyState == 4) {
+      if(request2.status == 200) {
+        alert(request2)
+      }
+
+    }
   }
   request2.open("GET", `${appAddress}/test`, true);
   request2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
