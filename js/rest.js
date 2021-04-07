@@ -39,7 +39,7 @@ function signupme() {
   let test = document.getElementById("request-test");
   let request2 = getRequestObject();
   request2.onreadystatechange = function() {
-    test.innerHTML = request2.response.body;
+    test.innerHTML = request2.response;
   }
   request2.open("GET", `${appAddress}/test`, true);
   request2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
