@@ -1,4 +1,4 @@
-var appAddress = "http://localhost:5000";
+var appAddress = "https://io-projekt-gamepage-api.herokuapp.com";
 
 function getRequestObject() {
   if (window.ActiveXObject)
