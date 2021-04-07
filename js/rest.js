@@ -43,7 +43,7 @@ function signupme() {
   }
   request2.open("GET", `${appAddress}/test`, true);
   request2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  request2.send(JSON.stringify(user));
+  request2.send();
   /***********************/
 }
 
