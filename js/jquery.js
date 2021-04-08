@@ -1,10 +1,13 @@
 $(document).ready(function(){
+  var $frontAddress = "https://io-proj.github.io/gamepage";
+  // var $frontAddress = "http://localhost:8000";
+
   if(getAccessToken()) {
-    $('nav').load(`${appAddress}/includes/nav_online.html`);
+    $('nav').load(`${$frontAddress}/includes/nav_online.html`);
   }
   else {
-    $('nav').load(`${appAdrress}/includes/nav_offline.html`);
+    $('nav').load(`${$frontAddress}/includes/nav_offline.html`);
   }
 
-  $('footer').load(`${appAddress}/includes/footer.html`);
+  $('footer').load(`${$frontAddress}/includes/footer.html`);
 });
