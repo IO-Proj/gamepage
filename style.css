@@ -8,13 +8,14 @@
   --neonGreen: #37ca8d;
   --dimGreen: #386b6d;
   --violetBlue: #6d61ef;
+  --neonBlue: #8DCFEF;
 
-  --barGradient: linear-gradient(to right,  #181A1B, #004c55, #458b8e, #458b8e, #004c55, #181A1B);
+  --barGradient: linear-gradient(to right,  #272046, #58489d  , #9285c7  , #9285c7  ,#58489d  , #272046);
   --buttonGradient: linear-gradient(to top,  #343632, #282923);
   --barOpacity: 0.9;
   --barFontSize: 1.2vw;
   --barFontColor: #d3e6df;
-  --barHeight: 4em;
+  --barHeight: 3.5em;
 
   --contentFontSize: 1vw;
   --contentBackgroundColor: #282923;
@@ -27,6 +28,7 @@
 
 html {
   box-sizing: border-box;
+  
 }
 
 *, *:before, *:after {
@@ -34,7 +36,8 @@ html {
 }
 
 body {
-  background-image: url("images/background.jpg");
+  background-image: url("images/background2.jpg");
+  font-family: 'Goldman', cursive;
   background-size: cover;
   background-attachment: fixed;
   color: var(--contentFontColor);
@@ -54,18 +57,18 @@ nav {
   position: fixed;
   margin: 0;
   background-image: var(--barGradient);
-  opacity: var(--barOpacity);
   height: var(--barHeight);
   z-index: 1;
 }
 
 nav a, nav div {
   display: inline-block;
-  padding: 1.3em;
+  padding: 1em;
   text-align: center;
   margin: 0;
   height: 100%;
   color: var(--barFontColor);
+  float: left;
 }
 
 nav a:link, nav a:visited, nav a:active {
@@ -74,18 +77,28 @@ nav a:link, nav a:visited, nav a:active {
 }
 
 nav a:hover, nav div:hover {
-  background-color: var(--dimGreen);
+  background-color: var(--neonBlue);
   cursor: pointer;
+  border: 2px solid;
+  transition: ease-in-out 1s;
 }
 
 /*basic elements*/
 
 h2, h3 {
-  color: var(--lightGreen);
+  color: var(--neonBlue);
 }
 
-img {
-  border-radius: 2em;
+#icon{
+  margin-left: 0.5em;
+}
+
+ nav img {
+  width: 10%;
+  height: 60%;
+  float: left;
+  margin-left: 0.5em;
+  margin-top: 0.8em;
 }
 
 table {
@@ -133,7 +146,7 @@ a:hover, a:active {
 }
 
 #content {
-  background-color: var(--contentBackgroundColor);
+  background-color: rgba(40, 41, 35, 0.95);
   margin: 0 auto;
   padding: 10%;
   width: 80%;
@@ -141,17 +154,17 @@ a:hover, a:active {
   min-height: 100vh;
   text-align: center;
   font-size: var(--contentFontSize);
-  border-right: 2em solid var(--darkGreen);
-  border-left: 2em solid var(--darkGreen);
+  border-right: 1em solid #33295B;
+  border-left: 1em solid #33295B;
 }
 
 button, input, select {
   background-image: var(--buttonGradient);
-  color: var(--lightGreen);
+  color: var(--neonBlue);
   margin: 2%;
   padding: 0.6em;
   font-weight: bold;
-  border: 0.2em outset var(--lightGreen);
+  border: 0.2em outset var(--neonBlue);
   border-radius: 2em;
 }
 
@@ -169,12 +182,11 @@ select {
 
 footer {
   background-image: var(--barGradient);
-  opacity: var(--barOpacity);
   padding: 0.3em;
   margin: 0;
-  margin-top: calc(-1 * var(--barHeight));
+  margin-top: calc(-1 * 3em);
   width: 100%;
-  height: var(--barHeight);
+  height : 3em;
   font-size: var(--barFontSize);
   font-weight: bold;
   color: var(--barFontColor);

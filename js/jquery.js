@@ -1,10 +1,10 @@
 $(document).ready(function(){
   if(getAccessToken()) {
-    $('nav').load("includes/nav_online.html");
+    $('nav').load("http://localhost:8000/includes/nav_online.html");
   }
   else {
-    $('nav').load("includes/nav_offline.html");
+    $('nav').load("http://localhost:8000/includes/nav_offline.html");
   }
 
-  $('footer').load("includes/footer.html");
+  $('footer').load("http://localhost:8000/includes/footer.html");
 });
