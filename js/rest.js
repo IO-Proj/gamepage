@@ -1,5 +1,5 @@
-// var appAddress = "https://io-projekt-gamepage-api.herokuapp.com";
-var appAddress = "http://localhost:5000";
+var appAddress = "https://io-projekt-gamepage-api.herokuapp.com";
+// var appAddress = "http://localhost:5000";
 
 //class representing ajax requests
 class Request {
@@ -128,6 +128,21 @@ function signupme() {
   };
 
   new Request("POST", `${appAddress}/api/add/user`, JSON.stringify(user), (req) => { loginme(user) }).send();
+
+  /* TEST - DO USUNIĘCIA */
+  let request2 = Request.getReqObject();
+  request2.onreadystatechange = function() {
+    if (request2.readyState == 4) {
+      if(request2.status == 200) {
+        alert(request2.response)
+      }
+
+    }
+  }
+  request2.open("GET", `${appAddress}/test`, true);
+  request2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  request2.send();
+  /***********************/
 }
 
 function saveMemoScore(seconds, comparisons) {
