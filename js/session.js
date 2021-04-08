@@ -1,9 +1,19 @@
+//getter and setter for access token
 function getAccessToken() {
   return localStorage.getItem("accessToken");
 }
 
 function setAccessToken(accessToken) {
   localStorage.setItem('accessToken', accessToken);
+}
+
+//getter and setter for refresh token
+function getRefreshToken() {
+  return localStorage.getItem("refreshToken");
+}
+
+function setRefreshToken(refreshToken) {
+  localStorage.setItem('refreshToken', refreshToken);
 }
 
 function onSessionLost() {
@@ -21,25 +31,17 @@ function loginFromForm() {
 }
 
 function loginme(credentials) {
-  let request = getRequestObject();
-  request.onreadystatechange = function() {
-    if (request.readyState == 4) {
-      if(request.status == 200) {
-        let response = JSON.parse(request.response);
-        setAccessToken(response.access_token);
-        window.location.href = "index.html";
-      }
-      else {
-        alert("Invalid username or password");
-      }
-    }
-  }
-  request.open("POST", `${appAddress}/auth`, true);
-  request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  request.send(JSON.stringify(credentials));
+  let req = new Request("POST", `${appAddress}/login`, JSON.stringify(credentials), (request) => {
+    let response = JSON.parse(request.response);
+    setAccessToken(response.access_token);
+    setRefreshToken(response.refresh_token);
+    window.location.href = "index.html";
+  });
+  req.send();
 }
 
 function logoutme() {
   localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
   window.location.href = "index.html";
 }
