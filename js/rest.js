@@ -1,5 +1,5 @@
-var appAddress = "https://io-projekt-gamepage-api.herokuapp.com";
-// var appAddress = "http://localhost:5000";
+// var apiAddress = "https://io-projekt-gamepage-api.herokuapp.com";
+// var apiAddress = "http://localhost:5000";
 
 //class representing ajax requests
 class Request {
@@ -66,7 +66,7 @@ class RequestWithAuth extends Request {
         let nextRequest = Request.getReqObject();
 
         nextRequest.onreadystatechange = () => { this.refreshResponseHandler(nextRequest); };
-        nextRequest.open("POST", `${appAddress}/refresh`, true);
+        nextRequest.open("POST", `${apiAddress}/refresh`, true);
         nextRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         nextRequest.setRequestHeader('Authorization', 'Bearer ' + getRefreshToken())
         nextRequest.send(null);
@@ -127,7 +127,7 @@ function signupme() {
     'password': form.pass.value
   };
 
-  new Request("POST", `${appAddress}/api/add/user`, JSON.stringify(user), (req) => { loginme(user) }).send();
+  new Request("POST", `${apiAddress}/api/add/user`, JSON.stringify(user), (req) => { loginme(user) }).send();
 
   /* TEST - DO USUNIĘCIA */
   let request2 = Request.getReqObject();
@@ -139,7 +139,7 @@ function signupme() {
 
     }
   }
-  request2.open("GET", `${appAddress}/test`, true);
+  request2.open("GET", `${apiAddress}/test`, true);
   request2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   request2.send();
   /***********************/
@@ -151,13 +151,13 @@ function saveMemoScore(seconds, comparisons) {
     'comparisons': comparisons
   };
 
-  let req = new RequestWithAuth("POST", `${appAddress}/api/add/score/memo`, JSON.stringify(score),
+  let req = new RequestWithAuth("POST", `${apiAddress}/api/add/score/memo`, JSON.stringify(score),
     (req) => { console.log(req.response); });
   req.send();
 }
 
 function getUserInfo() {
-  new RequestWithAuth("GET", `${appAddress}/api/user/info`, null, (req) => { console.log(req.response); }).send();
+  new RequestWithAuth("GET", `${apiAddress}/api/user/info`, null, (req) => { console.log(req.response); }).send();
 }
 
 // function sendGetRequest(url, successCallback) {
@@ -208,7 +208,7 @@ function getUserInfo() {
 //     }
 //   }
 
-//   request.open("POST", `${appAddress}/api/add/weather`, true);
+//   request.open("POST", `${apiAddress}/api/add/weather`, true);
 //   request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 //   request.setRequestHeader('Authorization', 'JWT ' + getAccessToken())
 //   request.send(JSON.stringify(records));
