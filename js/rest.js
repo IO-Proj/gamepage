@@ -56,8 +56,10 @@ class RequestWithAuth extends Request {
   send() {
     if(getAccessToken())
       super.send();
-    else
+    else {
       alert("You're not logged in");
+      window.location.href = `${webAddress}/index.html`;
+    }
   }
 
   responseHandler(request) {

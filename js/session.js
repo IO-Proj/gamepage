@@ -35,7 +35,7 @@ function loginme(credentials) {
     let response = JSON.parse(request.response);
     setAccessToken(response.access_token);
     setRefreshToken(response.refresh_token);
-    window.location.href = "index.html";
+    window.location.href = `${webAddress}/index.html`;
   });
   req.send();
 }
@@ -43,5 +43,5 @@ function loginme(credentials) {
 function logoutme() {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
-  window.location.href = "index.html";
+  window.location.href = `${webAddress}/index.html`;
 }
