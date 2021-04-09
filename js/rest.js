@@ -1,6 +1,3 @@
-// var apiAddress = "https://io-projekt-gamepage-api.herokuapp.com";
-// var apiAddress = "http://localhost:5000";
-
 //class representing ajax requests
 class Request {
   constructor(type, url, data, onSuccess, headers=null) {
@@ -54,6 +51,13 @@ class RequestWithAuth extends Request {
 
   constructor(type, url, data, onSuccess, headers={'Authorization': 'Bearer ' + getAccessToken()}) {
     super(type, url, data, onSuccess, headers);
+  }
+
+  send() {
+    if(getAccessToken())
+      super.send();
+    else
+      alert("You're not logged in");
   }
 
   responseHandler(request) {
@@ -128,21 +132,6 @@ function signupme() {
   };
 
   new Request("POST", `${apiAddress}/api/add/user`, JSON.stringify(user), (req) => { loginme(user) }).send();
-
-  /* TEST - DO USUNIĘCIA */
-  let request2 = Request.getReqObject();
-  request2.onreadystatechange = function() {
-    if (request2.readyState == 4) {
-      if(request2.status == 200) {
-        alert(request2.response)
-      }
-
-    }
-  }
-  request2.open("GET", `${apiAddress}/test`, true);
-  request2.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  request2.send();
-  /***********************/
 }
 
 function saveMemoScore(seconds, comparisons) {
