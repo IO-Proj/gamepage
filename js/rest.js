@@ -17,6 +17,7 @@ class Request {
     for (const key in this.headers)
       request.setRequestHeader(key, this.headers[key]);
     console.log(this.data);
+    console.log(request);
     request.send(JSON.stringify(this.data));
   }
 
