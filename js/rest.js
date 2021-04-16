@@ -133,16 +133,17 @@ function signupme() {
     'password': form.pass.value
   };
 
-  new Request("POST", `${apiAddress}/api/add/user`, JSON.stringify(user), (req) => { loginme(user) }).send();
+  new Request("POST", `${apiAddress}/register`, JSON.stringify(user), (req) => { loginme(user) }).send();
 }
 
-function saveMemoScore(seconds, comparisons) {
-  let score = {
-    'seconds': seconds,
-    'comparisons': comparisons
+function saveScore(score, game) {
+  let userScore = {
+    'score': score,
+    'username': "TEST",
+    'id_game': game
   };
 
-  let req = new RequestWithAuth("POST", `${apiAddress}/api/add/score/memo`, JSON.stringify(score),
+  let req = new RequestWithAuth("POST", `${apiAddress}/highscores/${game}`, JSON.stringify(userScore),
     (req) => { console.log(req.response); });
   req.send();
 }
