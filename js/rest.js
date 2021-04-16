@@ -16,8 +16,7 @@ class Request {
     request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     for (const key in this.headers)
       request.setRequestHeader(key, this.headers[key]);
-
-    request.send(this.data);
+    request.send(JSON.stringify(this.data));
   }
 
   responseHandler(request) {
@@ -98,7 +97,7 @@ class RequestWithAuth extends Request {
           nextRequest.open(this.type, this.url, true);
           nextRequest.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           nextRequest.setRequestHeader('Authorization', 'Bearer ' + getAccessToken())
-          nextRequest.send(this.data);
+          nextRequest.send(JSON.stringify(this.data));
         }
 
         else if (request.status == 401)
