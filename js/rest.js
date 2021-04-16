@@ -16,6 +16,7 @@ class Request {
     request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     for (const key in this.headers)
       request.setRequestHeader(key, this.headers[key]);
+    console.log(this.data);
     request.send(JSON.stringify(this.data));
   }
 
