@@ -150,7 +150,7 @@ function saveScore(score, game) {
 }
 
 function getUserInfo() {
-  new RequestWithAuth("GET", `${apiAddress}/api/user/info`, null, (req) => { console.log(req.response); }).send();
+  new RequestWithAuth("POST", `${apiAddress}/api/user/info`, null, (req) => { console.log(req.response); }).send();
 }
 
 // function sendGetRequest(url, successCallback) {
