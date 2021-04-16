@@ -31,7 +31,7 @@ function loginFromForm() {
 }
 
 function loginme(credentials) {
-  let req = new Request("POST", `${apiAddress}/login`, JSON.stringify(credentials), (request) => {
+  let req = new Request("GET", `${apiAddress}/login`, JSON.stringify(credentials), (request) => {
     let response = JSON.parse(request.response);
     setAccessToken(response.access_token);
     setRefreshToken(response.refresh_token);
