@@ -18,7 +18,7 @@ class Request {
       request.setRequestHeader(key, this.headers[key]);
     console.log(this.data);
     console.log(request);
-    //request.send(JSON.stringify(this.data));
+    request.send(this.data);
   }
 
   responseHandler(request) {
