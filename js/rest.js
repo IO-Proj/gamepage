@@ -16,8 +16,8 @@ class Request {
     request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     for (const key in this.headers)
       request.setRequestHeader(key, this.headers[key]);
-    console.log(this.data);
-    console.log(request);
+    // console.log(this.data);
+    // console.log(request);
     request.send(this.data);
   }
 
@@ -88,7 +88,7 @@ class RequestWithAuth extends Request {
 
       if (request.readyState == 4) {
         if (request.status == 200) {
-          console.log('refresh');
+          // console.log('refresh');
 
           let response = JSON.parse(request.response);
           setAccessToken(response.access_token);
@@ -140,18 +140,78 @@ function signupme() {
 function saveScore(score, game) {
   let userScore = {
     'score': score,
-    'username': "TEST",
     'id_game': game
   };
 
-  let req = new RequestWithAuth("POST", `${apiAddress}/highscores/${game}`, JSON.stringify(userScore),
+  let req = new RequestWithAuth("POST", `${apiAddress}/add/score`, JSON.stringify(userScore),
     (req) => { console.log(req.response); });
   req.send();
 }
 
-function getUserInfo() {
-  new RequestWithAuth("GET", `${apiAddress}/api/user/info`, null, (req) => { console.log(req.response); }).send();
+function getHighScores(game) {
+  let req = new RequestWithAuth("GET", `${apiAddress}/highscores/${game}`, null,
+    (req) => {
+      let resp = JSON.parse(req.response);
+      let str = ""
+      for(let i = 0; i < resp.length; i++) {
+        let record = resp[i];
+        str += `<tr>
+                  <th scope="row">${i+1}</th>
+                  <td>${record.username}</td>
+                  <td>${record.score}</td>
+                  </tr>`;
+      }
+      document.getElementById('highscores').innerHTML = str;
+    });
+  req.send();
 }
+
+function getUserInfo() {
+  function JSONtoTable(json) {
+    let str = "";
+
+    for(const key in json) {
+      let val = json[key];
+      if(typeof val == 'object'){
+        str += `<tr><td colspan="2">${key}</td></tr>`;
+        str += JSONtoTable(val);
+      }
+      else {
+        str += `<tr>
+                <td>${key}</td>
+                <td>${json[key]}</td>
+                </tr>`;
+      }
+    }
+    return str;
+  }
+
+  new RequestWithAuth("GET", `${apiAddress}/userinfo`, null,
+    (req) => {
+      let resp = JSON.parse(req.response);
+      delete resp['password'];
+      console.log(resp);
+      
+      document.getElementById('welcome_header').innerHTML = `Hello ${resp['username']}!`;
+      document.getElementById('userinfo').innerHTML = JSONtoTable(resp);
+    }).send();
+}
+
+function changePassword(form) {
+  if(form.newPass.value == form.repeatNewPass.value) {
+    let newData = {'old_password': form.oldPass.value, 'new_password': form.newPass.value};
+    let req = new RequestWithAuth("PUT", `${apiAddress}/change/password`, JSON.stringify(newData),
+      (req) => {
+        alert("Password successfully changed");
+        window.location.href = `${webAddress}/profile.html`;
+      });
+    req.send();
+  }
+  else {
+    alert("Password mismatch")
+  }
+}
+
 
 // function sendGetRequest(url, successCallback) {
 //   let request = getRequestObject();

@@ -6,6 +6,7 @@
   <title>Ranking</title>
 
   <script src="js/session.js"></script>
+  <script src="js/rest.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="js/config.js"></script>
@@ -18,15 +19,14 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
+<body onload="getHighScores('memo')">
   <nav></nav>
   <div id="content">
     <h2 style="color: #bbf547;">Ranking</h2>
     <div class="btn-group p-3" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary">MEMO</button>
-        <button type="button" class="btn btn-secondary">SUDOKU</button>
-        <button type="button" class="btn btn-secondary">SNAKE</button>
+        <button type="button" class="btn btn-secondary" onclick="getHighScores('memo')">MEMO</button>
+        <button type="button" class="btn btn-secondary" onclick="getHighScores('sudoku')">SUDOKU</button>
+        <button type="button" class="btn btn-secondary" onclick="getHighScores('snake')">SNAKE</button>
       </div>
     <div class="row justify-content-center">
         <table class="table w-50 center">
@@ -37,7 +37,8 @@
                 <th scope="col">Points</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="highscores"></tbody>
+            <!-- <tbody>
               <tr>
                 <th scope="row">1</th>
                 <td>Mark</td>
@@ -73,7 +74,7 @@
                 <td>Larry</td>
                 <td>248</td>
               </tr>
-            </tbody>
+            </tbody> -->
           </table>
       </div>
   </div>
