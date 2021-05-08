@@ -33,8 +33,13 @@ function loginFromForm() {
 function loginme(credentials) {
   let req = new Request("POST", `${apiAddress}/login`, JSON.stringify(credentials), (request) => {
     let response = JSON.parse(request.response);
+
     setAccessToken(response.access_token);
     setRefreshToken(response.refresh_token);
+
+    if(response.achievement)
+      alert(`New achievement!\n${response.achievement}`);
+
     window.location.href = `${webAddress}/index.html`;
   });
   req.send();
