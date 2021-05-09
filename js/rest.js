@@ -144,7 +144,14 @@ function saveScore(score, game) {
   };
 
   let req = new RequestWithAuth("POST", `${apiAddress}/add/score`, JSON.stringify(userScore),
-    (req) => { console.log(req.response); });
+    (req) => {
+      let response = JSON.parse(req.response);
+
+      if(response.level_up)
+        alert(`\nLevel up!`);
+
+      window.location.reload();
+    });
   req.send();
 }
 

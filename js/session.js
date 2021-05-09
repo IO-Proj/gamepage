@@ -40,6 +40,9 @@ function loginme(credentials) {
     if(response.achievement)
       alert(`New achievement!\n${response.achievement}`);
 
+    if(response.level_up)
+      alert(`Level up!`);
+
     window.location.href = `${webAddress}/index.html`;
   });
   req.send();
