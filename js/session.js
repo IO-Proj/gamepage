@@ -37,11 +37,11 @@ function loginme(credentials) {
     setAccessToken(response.access_token);
     setRefreshToken(response.refresh_token);
 
-    if(response.achievement)
+    if('achievement' in response)
       alert(`New achievement!\n${response.achievement}`);
 
-    if(response.level_up)
-      alert(`Level up!`);
+    if('level_up' in response)
+      alert(`Level up!\n(to lvl ${response.level_up})`);
 
     window.location.href = `${webAddress}/index.html`;
   });
