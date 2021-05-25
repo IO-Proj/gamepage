@@ -192,7 +192,6 @@ function getUserInfo() {
     (req) => {
       let resp = JSON.parse(req.response);
       delete resp['password'];
-      console.log(resp);
       
       document.getElementById('welcome_header').innerHTML = `Hello ${resp['username']}!`;
       document.getElementById('userinfo').innerHTML = JSONtoTable(resp);
@@ -214,57 +213,40 @@ function changePassword(form) {
   }
 }
 
+function displayBadges() {
+  let badges = [
+    "first login",
+    "5th login", 
+    "10th login",
+    "MEMO 1 win",
+    "MEMO 5 wins", 
+    "MEMO 20 wins",
+    "MEMO X points",
+    "MEMO X points",
+    "MEMO X points",
+    "Sudoku 1 win",
+    "Sudoku 5 wins",
+    "Sudoku 20 wins",
+    "Sudoku 15 minutes",
+    "Sudoku 10 minutes",
+    "Sudoku 5 minutes",
+    "Snake 100 apples sum",
+    "Snake 400 apples sum",
+    "Snake 1000 apples sum",
+    "Snake 10 apples",
+    "Snake 30 apples",
+    "Snake all apples"
+  ];
 
-// function sendGetRequest(url, successCallback) {
-//   let request = getRequestObject();
+  new RequestWithAuth("GET", `${apiAddress}/userinfo`, null,
+    (req) => {
+      let resp = JSON.parse(req.response);
 
-//   request.onreadystatechange = function() {
-//     if (request.readyState == 4) {
-//       if(request.status == 200) {
-//         successCallback(JSON.parse(request.response));
-//       }
-
-//       else if (request.status = 401) {
-//         onSessionLost();
-//       }
-
-//       else {
-//         alert(`Error ${request.status}: ${request.response}`);
-//       }
-//     }
-//   }
-//   request.open("GET", url, true);
-//   request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-//   request.setRequestHeader('Authorization', 'JWT ' + getAccessToken())
-//   request.send(null);
-// }
-
-// function addOnline(record) {
-//   let records = {
-//     'records': [record]
-//   }
-
-//   let request = getRequestObject();
-
-//   request.onreadystatechange = function () {
-//     if (request.readyState == 4 ) {
-
-//       if(request.status == 200) {
-//         window.location.reload();
-//       }
-
-//       else if(request.status == 401) {
-//         onSessionLost();
-//       }
-
-//       else {
-//         alert(`Błąd ${request.status}: ${request.response}`)
-//       }
-//     }
-//   }
-
-//   request.open("POST", `${apiAddress}/api/add/weather`, true);
-//   request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-//   request.setRequestHeader('Authorization', 'JWT ' + getAccessToken())
-//   request.send(JSON.stringify(records));
-// }
+      let notAchievedBadges = badges.filter(badge => !resp['badges'].includes(badge));
+      for (let badge of notAchievedBadges) {
+        let id = badge.replace(/\s/g, "-");
+        let img = document.getElementById(id);
+        if(img) img.style.opacity = "0.3"; // should be without if eventually
+      }
+    }).send();
+}
