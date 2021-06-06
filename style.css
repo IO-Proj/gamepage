@@ -99,6 +99,10 @@ td, th{
   background-color: #bbf547cb !important;
 }
 
+#userinfo td, #userinfo th{
+  background-color: var(--neonBlue) !important;
+}
+
 .btn
 {
   color: var(--neonBlue) !important;

@@ -175,14 +175,52 @@ function getUserInfo() {
     for(const key in json) {
       let val = json[key];
       if(typeof val == 'object'){
-        str += `<tr><td colspan="2">${key}</td></tr>`;
-        str += JSONtoTable(val);
+        if(key != "badges")
+        {
+          if(key == "stats")
+          {
+            str += `<tr><td colspan="2">Statistics</td></tr>`;
+          }
+          else if(key == "game_counter")
+          {
+            str += `<tr><td colspan="2">Won games</td></tr>`;
+          }
+          else if(key == "game_score_counter")
+          {
+            str += `<tr><td colspan="2">Games scores (summed up):</td></tr>`;
+          }
+          else if(key == "highscore")
+          {
+            str += `<tr><td colspan="2">Games highscores:</td></tr>`;
+          }
+          else
+          {
+            str += `<tr><td colspan="2">${key}</td></tr>`;
+            
+          }str += JSONtoTable(val);
+        }
       }
       else {
-        str += `<tr>
-                <td>${key}</td>
+        if(key == "0" || key == "1" || key == "username")
+        {
+          continue;
+        }
+        else
+        {
+          if(key == "login_counter")
+          {
+            str += `<tr>
+                <td>login count</td>
                 <td>${json[key]}</td>
                 </tr>`;
+          }
+          else{
+            str += `<tr>
+                    <td>${key}</td>
+                    <td>${json[key]}</td>
+                    </tr>`;
+          }
+        }
       }
     }
     return str;
@@ -194,7 +232,7 @@ function getUserInfo() {
       delete resp['password'];
       
       document.getElementById('welcome_header').innerHTML = `Hello ${resp['username']}!`;
-      document.getElementById('userinfo').innerHTML = JSONtoTable(resp);
+      document.getElementById('userinfo').innerHTML += JSONtoTable(resp);
     }).send();
 }
 
