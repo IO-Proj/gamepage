@@ -4,6 +4,3 @@
 [submodule "games/Sudoku"]
 	path = games/Sudoku
 	url = https://github.com/IO-Proj/Sudoku-Game.git
-[submodule "games/Snake"]
-	path = games/Snake
-	url = https://github.com/IO-Proj/Snake-Game.git
