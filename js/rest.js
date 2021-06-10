@@ -146,6 +146,14 @@ function saveScore(score, game) {
   let req = new RequestWithAuth("POST", `${apiAddress}/add/score`, JSON.stringify(userScore),
     (req) => {
       console.log(req.response);
+      
+      let response = JSON.parse(req.response);
+      if('badge' in response)
+      alert(`New badge!\n${response.badge}`);
+
+      if('level_up' in response)
+      alert(`Level up!\n(to lvl ${response.level_up})`);
+
     });
   req.send();
 }
