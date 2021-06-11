@@ -16,8 +16,6 @@ class Request {
     request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     for (const key in this.headers)
       request.setRequestHeader(key, this.headers[key]);
-    // console.log(this.data);
-    // console.log(request);
     request.send(this.data);
   }
 
@@ -145,15 +143,18 @@ function saveScore(score, game) {
 
   let req = new RequestWithAuth("POST", `${apiAddress}/add/score`, JSON.stringify(userScore),
     (req) => {
-      console.log(req.response);
-      
+      console.log(req.response);      
       let response = JSON.parse(req.response);
-      if('badge' in response)
-      alert(`New badge!\n${response.badge}`);
+
+      if('new_badges' in response) {
+        let newBadgesStr = "";
+        for(const badge of response['new_badges'])
+          newBadgesStr += `\n${badge}`;
+        alert(`New badges: ${newBadgesStr}`);
+      }
 
       if('level_up' in response)
-      alert(`Level up!\n(to lvl ${response.level_up})`);
-
+        alert(`Level up!\n(to lvl ${response.level_up})`);
     });
   req.send();
 }
@@ -260,39 +261,15 @@ function changePassword(form) {
 }
 
 function displayBadges() {
-  let badges = [
-    "first login",
-    "5th login", 
-    "10th login",
-    "MEMO 1 win",
-    "MEMO 5 wins", 
-    "MEMO 20 wins",
-    "MEMO X points",
-    "MEMO X points",
-    "MEMO X points",
-    "Sudoku 1 win",
-    "Sudoku 5 wins",
-    "Sudoku 20 wins",
-    "Sudoku 15 minutes",
-    "Sudoku 10 minutes",
-    "Sudoku 5 minutes",
-    "Snake 100 apples sum",
-    "Snake 400 apples sum",
-    "Snake 1000 apples sum",
-    "Snake 10 apples",
-    "Snake 30 apples",
-    "Snake all apples"
-  ];
-
   new RequestWithAuth("GET", `${apiAddress}/userinfo`, null,
     (req) => {
       let resp = JSON.parse(req.response);
-
-      let notAchievedBadges = badges.filter(badge => !resp['badges'].includes(badge));
-      for (let badge of notAchievedBadges) {
-        let id = badge.replace(/\s/g, "-");
-        let img = document.getElementById(id);
-        if(img) img.style.opacity = "0.3"; // should be without if eventually
+      let userBadges = resp['badges'];
+      for (const badge in userBadges) {
+        if(userBadges[badge] == false) {
+          let img = document.getElementById(badge);
+          if(img) img.style.opacity = "0.3"; // should be without if eventually
+        }
       }
     }).send();
 }

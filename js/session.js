@@ -37,8 +37,8 @@ function loginme(credentials) {
     setAccessToken(response.access_token);
     setRefreshToken(response.refresh_token);
 
-    if('badge' in response)
-      alert(`New badge!\n${response.badge}`);
+    if('new_badge' in response)
+      alert(`New badge:\n${response.new_badge}!`);
 
     if('level_up' in response)
       alert(`Level up!\n(to lvl ${response.level_up})`);
