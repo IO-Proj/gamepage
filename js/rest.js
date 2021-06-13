@@ -268,7 +268,7 @@ function displayBadges() {
       for (const badge in userBadges) {
         if(userBadges[badge] == false) {
           let img = document.getElementById(badge);
-          if(img) img.style.opacity = "0.3"; // should be without if eventually
+          img.style.opacity = "0.3";
         }
       }
     }).send();
